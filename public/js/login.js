@@ -1,4 +1,4 @@
-function sendit() {
+async function sendit() {
     const userid = document.getElementById("userid")
     const userpw = document.getElementById("userpw")
 
@@ -16,5 +16,31 @@ function sendit() {
         alert("비밀번호를 입력하세요")
         userpw.focus()
         return false
+    }
+
+    // 서버로 로그인 요청 전송
+    try{
+        const res = await fetch("/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userid: userid.value,
+                userpw: userpw.value
+            })
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+            alert(data.error || "아이디 또는 비밀번호가 일치하지 않습니다")
+            return false
+        }
+
+        alert("로그인 성공")
+        window.location.href = "/"      // 로그인 후 이동할 페이지로 수정 필요❗
+    } catch (err) {
+        console.log("로그인 서버 통신 오류")
+        console.error(err)
+        alert("서버와 통신 중 오류가 발생했습니다")
     }
 }

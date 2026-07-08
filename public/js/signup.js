@@ -1,4 +1,4 @@
-function sendit() {
+async function sendit() {
     const userid = document.getElementById("userid")
     const userpw = document.getElementById("userpw")
     const userpw_re = document.getElementById("userpw_re")
@@ -93,6 +93,36 @@ function sendit() {
         alert("선생님/학생 중 하나를 선택하세요")
         return false
     }
+
+    // 서버로 회원가입 요청 전송
+    try {
+        const res = await fetch("/auth/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userid: userid.value,
+                userpw: userpw.value,
+                nickname: nickname.value,
+                username: username.value,
+                email: email.value,
+                userType: typeChecked.value
+            })
+        }) 
+
+        const data = await res.json()
+
+        if(!res.ok) {
+            alert(data.error || "회원가입에 실패했습니다")
+            return false
+        }
+
+        alert("회원가입이 완료되었습니다")
+        window.location.href = "/login.html"
+    } catch (err) {
+        console.log("회원가입 서버 통신 오류")
+        console.error(err)
+        alert("서버와 통신 중 오류가 발생했습니다")
+    }
 }
 
 async function duplCheck() {
@@ -105,7 +135,7 @@ async function duplCheck() {
     }
 
     try {
-        const res = await fetch(`/checkid?userid=${encodeURIComponent(userid.value)}`)
+        const res = await fetch(`/auth/checkid?userid=${encodeURIComponent(userid.value)}`)
         const data = await res.json()
 
         if (data.exists) {
@@ -116,7 +146,7 @@ async function duplCheck() {
             userid.dataset.checked = "true"    // 사용 가능하니까 true
         }
     } catch (err) {
-        console.log(err)
+        console.error(err)
         alert("중복확인 중 오류가 발생했습니다")
     }
 }
