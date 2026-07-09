@@ -56,6 +56,12 @@ export async function login(req, res) {
     return res.status(200).json({ token, user: safeUser })
 }
 
+// 로그인 유지 체크
+export async function me(req, res) {
+    const { userpw, ...safeUser } = req.user
+    res.status(200).json({ token: req.token, user: safeUser })
+}
+
 // 토큰 생성 함수
 async function createJwtToken(id) {
     return jwt.sign({ id }, config.jwt.secretKey, {
