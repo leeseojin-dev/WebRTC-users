@@ -43,11 +43,20 @@ async function sendit() {
             alert(data.message || "아이디 또는 비밀번호가 일치하지 않습니다")
             return false
         }
-
+        
+        // 로그인 성공 후 토큰 저장, 각 userType에 맞게 페이지 이동
         localStorage.setItem("token", data.token)
         localStorage.setItem("_id", data.user._id)
         alert("로그인 성공")
-        window.location.href = "/"      // 로그인 후 이동할 페이지로 수정 필요❗
+
+        if (data.user.userType === "teacher") {
+            window.location.href = "/teacherLobby.html"
+        } else if (data.user.userType === "student") {
+            window.location.href = "/studentLobby.html"
+        } else {
+            alert("유효하지 않은 유저 타입입니다")
+        }
+        
     } catch (err) {
         console.log("로그인 서버 통신 오류")
         console.error(err)
