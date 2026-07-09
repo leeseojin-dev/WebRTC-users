@@ -45,6 +45,7 @@ async function sendit() {
         }
 
         localStorage.setItem("token", data.token)
+        localStorage.setItem("_id", data.user._id)
         alert("로그인 성공")
         window.location.href = "/"      // 로그인 후 이동할 페이지로 수정 필요❗
     } catch (err) {
