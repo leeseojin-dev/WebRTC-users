@@ -10,6 +10,7 @@ router.get("/checkid", authController.checkId)
 router.post("/signup", authController.signup)
 
 // 로그인
+router.post("/login", authController.login)
 
 // 로그인 유지 체크
 

@@ -1,3 +1,11 @@
+window.onload = function() {
+    // 폼의 기본 제출(페이지 이동) 막음
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault()
+        await sendit()
+    })
+}
+
 async function sendit() {
     const userid = document.getElementById("userid")
     const userpw = document.getElementById("userpw")
@@ -30,12 +38,13 @@ async function sendit() {
         })
 
         const data = await res.json()
-
+        
         if (!res.ok) {
-            alert(data.error || "아이디 또는 비밀번호가 일치하지 않습니다")
+            alert(data.message || "아이디 또는 비밀번호가 일치하지 않습니다")
             return false
         }
 
+        localStorage.setItem("token", data.token)
         alert("로그인 성공")
         window.location.href = "/"      // 로그인 후 이동할 페이지로 수정 필요❗
     } catch (err) {
