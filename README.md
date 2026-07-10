@@ -38,9 +38,11 @@ npm run dev   # 또는 node app.mjs
     │   ├── login.js
     │   └── signup.js
     ├──css/
-    │   └──
+    │   └── style.css
     ├── login.html
-    └── signup.html
+    ├── signup.html
+    ├── studentLobby.html
+    └── teacherLobby.html
 ```
 
 > 3계층 아키텍처(`router` → `controller` → `repository`)로 구성
