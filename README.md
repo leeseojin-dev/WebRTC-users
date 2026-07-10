@@ -7,7 +7,7 @@
 ```bash
 npm install
 # .env 파일에 MONGO_URI, JWT_SECRET_KEY, PORT 등 설정 필요
-npm start   # 또는 nodemon app.mjs
+npm run dev   # 또는 node app.mjs
 ```
 
 ## 프로젝트 구조
