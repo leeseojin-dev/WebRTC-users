@@ -50,9 +50,9 @@ async function sendit() {
         alert("로그인 성공")
 
         if (data.user.userType === "teacher") {
-            window.location.href = "/teacherLobby.html"
+            window.location.href = "/lobby/teacher"
         } else if (data.user.userType === "student") {
-            window.location.href = "/studentLobby.html"
+            window.location.href = "/lobby/student"
         } else {
             alert("유효하지 않은 유저 타입입니다")
         }
