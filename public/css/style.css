@@ -103,8 +103,8 @@ h2 {
     background-color: #333;
 }
 
-/* 중복확인 실패 */
-#userid.check-fail {
+/* 회원가입 입력 폼 오류 시 */
+.inputBox input.check-fail {
     border-color: #ff4d4d;
 }
 
